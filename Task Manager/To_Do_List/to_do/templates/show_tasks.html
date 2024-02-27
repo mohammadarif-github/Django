@@ -1,0 +1,61 @@
+{% extends "home.html" %}
+{% load crispy_forms_tags %}
+{% block link %}
+<div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+    <div class="navbar-nav">
+        <a class="nav-link text-white" href="{% url "homepage" %}">Home</a>
+        <a class="nav-link text-white" href="{% url "add_task" %}">Add Task</a>
+        <a class="nav-link text-white" href="{% url "completed_tasks" %}">Completed Task</a>
+    </div>
+</div>
+{% endblock link %}
+{% block content %}
+<style>
+    .header-box {
+        width: 35%;
+        margin: 20px auto;
+        padding: 5px;
+        background-color: #e0a899;
+        border: 2px solid #964b00;
+        border-radius: 10px;
+        text-align: center;
+        color: brown;
+        font-size: 25px; 
+      }
+  </style>
+  {% if tasks %}
+    <div class = "header-box">
+        <h1 style="width:50% ;margin: 20px auto;; color :brown;">Tasks LIST</h1>
+    </div>
+    <div style="width: 80%; margin: auto;">
+        <table class="table table-bordered border-primary text-center">
+            <thead>
+                <th>Title</th>
+                <th>Description</th>
+                <th>Status</th>
+                <th>Actions</th>
+            </thead>
+            {% for task in tasks %}
+            {% if not task.completed %}
+            <tbody>
+                <tr>
+                    <td>{{task.taskTitle}}</td>
+                    <td>{{task.taskDescription}}</td>
+                    <td>Incomplete</td>
+                    <td>
+                        <a href="{% url "delete_task" task.id %}"class="btn btn-danger">Delete</a>
+                        <a href="{% url "edit_task" task.id %}"  type="submit" class="btn btn-warning">Edit</a>
+                        <a href="{% url "complete_task" task.id %}" type="submit" class="btn btn-primary ">Complete</a>
+                    </td>
+                </tr>
+            </tbody>
+            {% endif %}
+            {% endfor %}
+        </table>
+    </div>
+{%else%}
+<div class = "header-box">
+    <h1 style="width:50% ;margin: 20px auto;; color :brown;">No Task To show</h1>
+</div>
+{% endif %}
+{% endblock content %}

@@ -1,0 +1,14 @@
+{% extends "home.html" %}
+{% load crispy_forms_tags %}
+{% block link %}
+<div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+    <div class="navbar-nav">
+        <a class="nav-link text-white" href="{% url "homepage" %}">Home</a>
+        <a class="nav-link text-white" href="{% url "show_tasks" %}">Show Tasks</a>
+        <a class="nav-link text-white" href="#">Completed Task</a>
+    </div>
+</div>
+{% endblock link %}
+{% block content %}
+
+{% endblock content %}
